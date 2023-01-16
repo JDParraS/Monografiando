@@ -1,0 +1,12 @@
+
+<Form action= "{% url 'Usuarios:entrar' %}" method='post'>
+{% csrf_token %}
+<label for='nombreCompleto' >Nombre y Apellido</label>
+<input type='text' id='nombreCompleto' name='nombre'>
+
+<label for='Contra' >Nombre y Apellido</label>
+<input type='password' id='Contra' name='pw'>
+
+<input type="submit" value="Entrar">
+</form>
+

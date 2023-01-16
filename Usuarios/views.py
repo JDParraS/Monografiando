@@ -1,15 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Usuario
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 
 def formEntrar(request):
-    return render(request,'Usuarios/entrar.html')
+    return render(request,'Usuarios/formEntrar.html')
+
 
 def entrar(request):
-    nombreU = request.POST['nombre']
-    pww = request.POST['pw']
-    u = Usuario.objects.get(nombre_usuario=nombreU,contraseña = pww)
-    return HttpResponseRedirect(reverse(''))
+    try:
+        global user
+        user = get_object_or_404(Usuario,nombre_usuario=request.POST['nombre'],contraseña=request.POST['pw'])
+        ctx = {'user':user}
+    except:
+        return HttpResponse('equivocado')
+    
+    return render(request,'Usuarios/entrar.html',ctx)
 
