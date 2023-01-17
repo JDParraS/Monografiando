@@ -1,5 +1,7 @@
 from django.db import models
-from forum.models import Foro
+from django.apps import apps
+
+# Foro = apps.get_model(app_label='forum',model_name='Foro')
 
 class Year(models.Model):
     year = models.IntegerField()
@@ -21,7 +23,7 @@ class Semana (models.Model):
 class Contenido(models.Model):
     tipo = models.CharField(max_length=100)
     ubic = models.CharField(max_length=200)
-    foro = models.ForeignKey(Foro,on_delete=models.CASCADE)
+    foro = models.ForeignKey('forum.Foro',on_delete=models.CASCADE)
     # es endingpoint ManyToMany de Tema
     # es endingpoint ManyToMany de Evento
 

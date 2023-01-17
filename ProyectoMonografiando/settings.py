@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'PagPrincipal.apps.PagprincipalConfig',
     'entrys.apps.EntrysConfig',
+    'forum.apps.ForumConfig',
     'Usuarios.apps.UsuariosConfig',
     'django.contrib.admin',
     'django.contrib.auth',
