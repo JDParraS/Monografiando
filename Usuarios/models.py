@@ -36,6 +36,7 @@ class Usuario(models.Model):
     # es endingpoint de Foro
 
 class Grupo(models.Model):
+    nombre = models.CharField(max_length=200)
     curso = models.ForeignKey(Curso,on_delete=models.CASCADE)
     usuarios = models.ManyToManyField(Usuario)
     evento = models.ManyToManyField('entrys.Evento',through='Calificacion')

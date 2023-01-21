@@ -1,0 +1,29 @@
+[33mcommit c525d20b85744d5a7bb268f70341cca0326048da[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Julian Parra <juliandpsuarez@gmail.com>
+Date:   Mon Jan 16 19:01:51 2023 -0500
+
+    Al final no se pudo utilizar metodo get_module(), daba error porque aun asi no estaban, lo dire de manera coloquial:"inicializados" los modelos, pero si se pudo poniendo los modelos a importar entre comillas, eso se llama lazy import para modelos:"lazy model imports",posterior a esto se tuvo otro problema, al intentar ligar un modelo con otro dos veces, una ManyToOne y otra ManyToMany: exactamente entre Foro↔Like↔Usuario y Comentario↔Like↔Usuario, aparte de eso SE LOGRARON CREAR LAS TABLAS ¡¡
+
+[33mcommit 93cca397287310def217f884c27d743603d45688[m
+Author: Julian Parra <juliandpsuarez@gmail.com>
+Date:   Mon Jan 16 17:35:13 2023 -0500
+
+    Acabmos de realizar los modelos, sin embargo ocurre "circular imports", lo que quiere decir que un modulo 1 al intentar importar otro modulo 2 que a su vez importa al modulo 1, va a tirar error. Se intentara utilizar el metodo get_module() del objeto apps dentro del modulo django.apps
+
+[33mcommit 0277ebf7a9f7e0a4aaa8d3be61da48d721451672[m
+Author: Julian Parra <juliandpsuarez@gmail.com>
+Date:   Mon Jan 16 09:37:57 2023 -0500
+
+    Se arreglo el formulario de entrar de usuario, ya es posible utilizar usuarios, tambien se acaba de crear modelo Evento para la app entrys, considerando tener apps: Usuarios, entrys, forum, y PagPrincipal
+
+[33mcommit 73014b1d5ab57748734cfa0efbd5c2f7b5a1abe7[m
+Author: Julian Parra <juliandpsuarez@gmail.com>
+Date:   Thu Jan 12 19:29:51 2023 -0500
+
+    Acabamos de crear la base de datos y la tabla 'usuarios' junto a formulario de entrada de usuario, continuaremos creando la aplicacion que maneje la pagina principal
+
+[33mcommit a3deaa7e8248477dc8b87ddb1aa1634b64e41561[m
+Author: Julian Parra <juliandpsuarez@gmail.com>
+Date:   Thu Jan 12 15:15:35 2023 -0500
+
+    acabando de crear la carpeta

@@ -5,7 +5,7 @@ from django.urls import reverse
 
 
 def formEntrar(request):
-    return render(request,'Usuarios/formEntrar.html')
+    return render(request,'PagPrincipal/base.html')
 
 
 def entrar(request):
@@ -16,5 +16,5 @@ def entrar(request):
     except:
         return HttpResponse('equivocado')
     
-    return render(request,'Usuarios/entrar.html',ctx)
+    return render(request,'PagPrincipal/base.html',ctx)
 

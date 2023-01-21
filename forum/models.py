@@ -8,6 +8,7 @@ class Foro(models.Model):
     nombPub = models.CharField(max_length=300)
     textoPub = models.TextField()
     fechaPub = models.DateField()
+    modulo = models.ForeignKey('entrys.Modulo',on_delete=models.CASCADE)
     usuario = models.ForeignKey('Usuarios.Usuario',on_delete=models.CASCADE)
     # likes = models.ManyToManyField('Usuarios.Usuario',through='Like') →→→→→ DA ERROR YA QUE YA EXISTE UNA 'REFERENCIE AL MISMO MODELO 
     
@@ -17,7 +18,6 @@ class Foro(models.Model):
 class Comentario(models.Model):
     fechaPub = models.DateField()
     foro = models.ForeignKey(Foro,on_delete=models.CASCADE)
-    modulo = models.ForeignKey('entrys.Modulo',on_delete=models.CASCADE)
     usuario = models.ForeignKey('Usuarios.Usuario',on_delete=models.CASCADE)
     texto = models.TextField()
     # likes = models.ManyToManyField('Usuarios.Usuario',through='Like')
