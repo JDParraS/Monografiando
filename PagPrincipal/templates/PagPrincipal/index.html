@@ -1,1 +1,11 @@
-<p>bienvenido {{usuario.name}}<p>
+{% extends "PagPrincipal/base.html" %}
+{% block title%}
+    Monografiando | Pagina Principal
+{% endblock%}
+{%block contenido%}
+    {% if Resumen %}
+        {% for mod in Resumen  %}
+            <p>{{mod.0.tituloMod}}</p>
+        {% endfor %}
+    {% endif %}
+{% endblock  %}

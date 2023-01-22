@@ -1,5 +1,7 @@
 from django.db import models
 from django.apps import apps
+from django.utils import timezone
+import datetime
 
 # Modulo = apps.get_model(app_label='entrys',model_name='Modulo')
 # Usuario = apps.get_model(app_label='Usuarios',model_name='Usuario')

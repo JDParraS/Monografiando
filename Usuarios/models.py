@@ -1,5 +1,7 @@
 from django.db import models
 from django.apps import apps
+from django.utils import timezone
+import datetime
 
 # importando otros modelos:
 
@@ -11,12 +13,14 @@ from django.apps import apps
 
 class Curso(models.Model):
     nombre_curso = models.CharField(max_length=200)
+    grado= models.IntegerField()
     year = models.ForeignKey('entrys.Year',on_delete=models.CASCADE)
     # es endingpoint de Grupo
     # es ending point de Usuario
 
 class Tema(models.Model):
-    contenido = models.ManyToManyField('entrys.Contenido')
+    nombre = models.CharField(max_length=150, blank=True, null=True)
+    contenido = models.ManyToManyField('entrys.Contenido',blank=True,null=True)
     # es endingpoint de Usuario
 
 class Usuario(models.Model):
@@ -24,9 +28,10 @@ class Usuario(models.Model):
     nickname = models.CharField(max_length=100)
     contraseña = models.CharField(max_length=100)
     profesor =models.BooleanField()
-    temaInv = models.ForeignKey(Tema,on_delete=models.CASCADE)
-    curso = models.ForeignKey(Curso,on_delete=models.CASCADE)
-    evento = models.ManyToManyField('entrys.Evento',through='Calificacion')
+    temaInv = models.ForeignKey(Tema,on_delete=models.CASCADE,blank=True,null=True)
+    curso = models.ForeignKey(Curso,on_delete=models.CASCADE,blank=True,null=True)
+    evento = models.ManyToManyField('entrys.Evento',through='Calificacion',blank=True,null=True)
+    numTemp = models.IntegerField(blank=True,null=True)
     # relacion ManyToMany con Foro através de Like →→→→→ DA ERROR YA QUE YA EXISTE UNA 'REFERENCIE AL MISMO MODELO 
     # relacion ManyToMany con Grupo 
     # es endingpoint de Comentario
