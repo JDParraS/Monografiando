@@ -1,0 +1,11 @@
+{% extends "PagPrincipal/base.html" %}
+{% block title%}
+    Monografiando | Modulo {{mod.tituloMod}}
+{% endblock%}
+{%block contenido%}
+    <div>
+    {% for sem in sems %}
+            <h1><a href="{%url 'entrys:verSemana' Usro.numTemp mod.id sem.id%}">Semana {{sem.tituloSem}}</a></h1>
+    {% endfor %}
+    </div>
+{% endblock  %}

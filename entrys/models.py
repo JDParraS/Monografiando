@@ -20,10 +20,13 @@ class Semana (models.Model):
     tituloSem = models.CharField(max_length=300)
     seman = models.IntegerField()
     modulo = models.ForeignKey(Modulo, on_delete=models.CASCADE)
+    descripcion = models.TextField()
     # es endingpoint de Evento
 
 class Contenido(models.Model):
-    tipo = models.CharField(max_length=100)
+    tipos=[('pdf','pdf'),('video','video')]
+    tipo = models.CharField(max_length=100,choices=tipos)
+    titulo = models.CharField(max_length=200)
     ubic = models.CharField(max_length=200)
     foro = models.ForeignKey('forum.Foro',on_delete=models.CASCADE,blank=True,null=True)
     # es endingpoint ManyToMany de Tema
@@ -42,9 +45,13 @@ class Evento(models.Model):
     # es el endpoint de ManyToMany de Usuario
 
 class Ejercicio(models.Model):
-    tipoEj = [("ResMult","ResMult"),("ResUni","ResUni")]
+    tipoEj = [("Respuesta Multiple","Respuesta Multiple"),("Respuesta Unica","Respuesta Unica"),("Texto","Texto")]
+    lstFormType = [("checkbox","checkbox"),("radio","radio"),("text","text")]
+    formType= models.CharField(choices=lstFormType,max_length=100)
     tipo = models.CharField(choices=tipoEj,max_length=100)
     puntaje = models.IntegerField()
+    titulo = models.CharField(max_length=200)
+    descripcion = models.CharField(max_length=1200)
     evento = models.ForeignKey(Evento,on_delete=models.CASCADE)
     # es endingpoint de Opciones
 

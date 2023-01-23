@@ -36,18 +36,18 @@ mod1.save();mod2.save();mod3.save(),mod4.save()
 # # # CREAR LAS SEMANAS
 
 Sem1 = Semana.objects.create(tituloSem='1',seman=1,modulo=mod1)
-# Sem2 = Semana.objects.create(tituloSem='2',seman=1,modulo=mod1)
-# Sem3 = Semana.objects.create(tituloSem='3',seman=1,modulo=mod1)
-# Sem4 = Semana.objects.create(tituloSem='4',seman=1,modulo=mod1)
-# Sem5 = Semana.objects.create(tituloSem='5',seman=1,modulo=mod1)
-# Sem6 = Semana.objects.create(tituloSem='6',seman=1,modulo=mod1)
-# Sem7 = Semana.objects.create(tituloSem='7',seman=1,modulo=mod1)
-# Sem8 = Semana.objects.create(tituloSem='8',seman=1,modulo=mod1)
-# Sem9 = Semana.objects.create(tituloSem='9',seman=1,modulo=mod1)
-# Sem10 = Semana.objects.create(tituloSem='10',seman=1,modulo=mod1)
+# Sem2 = Semana.objects.create(tituloSem='2',seman=2,modulo=mod1)
+# Sem3 = Semana.objects.create(tituloSem='3',seman=3,modulo=mod1)
+# Sem4 = Semana.objects.create(tituloSem='4',seman=4,modulo=mod1)
+# Sem5 = Semana.objects.create(tituloSem='5',seman=5,modulo=mod1)
+# Sem6 = Semana.objects.create(tituloSem='6',seman=6,modulo=mod1)
+# Sem7 = Semana.objects.create(tituloSem='7',seman=7,modulo=mod1)
+# Sem8 = Semana.objects.create(tituloSem='8',seman=8,modulo=mod1)
+# Sem9 = Semana.objects.create(tituloSem='9',seman=9,modulo=mod1)
+# Sem10 = Semana.objects.create(tituloSem='10',seman=10,modulo=mod1)
 Sem11 = Semana.objects.create(tituloSem='11',seman=11,modulo=mod2)
-# Sem12 = Semana.objects.create(tituloSem='12',seman=1,modulo=mod2)
-# Sem13 = Semana.objects.create(tituloSem='13',seman=1,modulo=mod2)
+# Sem12 = Semana.objects.create(tituloSem='12',seman=12,modulo=mod2)
+# Sem13 = Semana.objects.create(tituloSem='13',seman=13,modulo=mod2)
 # Sem14 = Semana.objects.create(tituloSem='14',seman=1,modulo=mod2)
 # Sem15 = Semana.objects.create(tituloSem='15',seman=1,modulo=mod2)
 # Sem16 = Semana.objects.create(tituloSem='16',seman=1,modulo=mod2)
@@ -180,7 +180,7 @@ et magnis dis parturient montes, nascetur ridiculus mus. Integer malesuada solli
      mollis orci. Aliquam consectetur dictum odio, id ornare elit tincidunt ut. Aliquam ultrices 
      sollicitudin lacus. Curabitur ultrices purus et blandit pharetra.''')
 
-Even5= Evento.objects.create(nombre="31th Work Boys",semana = Sem1,comentario='''Lorem ipsum 
+Even5= Evento.objects.create(nombre="2th Work Boys",semana = Sem1,comentario='''Lorem ipsum 
 dolor sit amet, consectetur adipiscing elit. 
 Sed imperdiet hendrerit odio, vel dignissim mi pretium non. Nam odio nunc, blandit 
 non quam eget, fermentum ornare leo. 
@@ -225,8 +225,9 @@ Op1_1.save();Op1_2.save();Op1_3.save(),Op1_4.save()
 cont = Contenido.objects.create(tipo='pdf',ubic="/aqui") ####→→→ Necesario guardarlo?
 TemInv1 = cont.tema_set.create(nombre='Word Studies')
 TemInv2 = cont.tema_set.create(nombre='Physics')
+TemInv3 = Tema.objects.create(nombre='Philosophy')
 
-TemInv1.save();TemInv2.save()
+TemInv1.save();TemInv2.save();TemInv3.save()
 
 # # # CREAR USUARIO
 
@@ -235,4 +236,11 @@ Us1 = Usuario.objects.create(nombre_usuario="A",nickname="A",contraseña="A",pro
 Us2 = Usuario.objects.create(nombre_usuario="B",nickname="B",contraseña="B",profesor=False,temaInv=TemInv2,curso=curso10_4)
 
 UsProf.save();Us1.save(),Us2.save()
+
+# # # CREAR CONTENIDO
+
+Con1 = Contenido.objects.create(tipo='video',ubic='src/Guide-Extended-Essay-1.pdf')
+Con2 = Contenido.objects.create(tipo='pdf',ubic='src/Introduction_to_IB_TheExtendedEssay.mp4')
+
+
 
