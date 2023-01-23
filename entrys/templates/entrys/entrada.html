@@ -24,24 +24,23 @@
             {% endif %}
         {% endfor %}
         
-        
-        {% if not lstEjOp  %}
-            <p>No hay ejercicios</p>
-        {% else %}
-            <p>Ejercicios¡</p>
+        {% if lstEjOp %}
+            <p>Ejercicios:</p>
+            {% if calif %}
+                Tu calificacion pasada es {{calif.nota}}
+            {% endif %}
         {% endif %}
         
         <form action="{% url 'entrys:evaluador' Usro.numTemp mod.id sem.id even.id%}" method="post">
         {% csrf_token %}
         {% for ejeOp in lstEjOp %}
-            <p style="font-size: xx-small">Este punto tiene un puntaje de {{ejeOp.0.puntaje}} y es de {{ejeOp.0.tipo}}</p>
             <p>{{ejeOp.0.descripcion}}</p>
+            <p style="font-size: xx-small">{{ejeOp.0.puntaje}} puntos, {{ejeOp.0.tipo}}</p>
             <ul style="list-style: none">
-            <p>{{ejeOp.0.formType}}</p>
             {% if ejeOp.0.formType == "radio"%}
                 {% for Op in ejeOp.1 %}
                     <li>
-                    <input type="{{ejeOp.0.formType}}" id="{{Op.id}}" name ="{{ejeOp.0.id}}" value="Ej{{ejeOp.0.id}}Op{{Op.id}}"/>
+                    <input type="{{ejeOp.0.formType}}" id="{{Op.id}}" name ="Ej{{ejeOp.0.id}}" value="{{Op.id}}"/>
                     <label for="{{Op.id}}">{{Op.opcion}}</label>
                     </li>
                 {% endfor %}
@@ -49,7 +48,7 @@
             {% elif ejeOp.0.formType == "checkbox" %}
                 {% for Op in ejeOp.1 %}
                     <li>
-                    <input type="{{ejeOp.0.formType}}" id="{{Op.id}}" name ="Ej{{ejeOp.0.id}}Op{{Op.id}}" value="Ej{{ejeOp.0.id}}Op{{Op.id}}"/>
+                    <input type="{{ejeOp.0.formType}}" id="{{Op.id}}" name ="Op{{Op.id}}" value="{{Op.id}}"/>
                     <label for="{{Op.id}}">{{Op.opcion}}</label>
                     </li>
                 {% endfor %}
@@ -57,8 +56,8 @@
             {% elif ejeOp.0.formType == "text" %}
                 {% for Op in ejeOp.1 %}
                     <li>
-                    <input type="{{ejeOp.0.formType}}" id="{{Op.id}}" name ="Ej{{ejeOp.0.id}}{{Op.id}}"/>
                     <label for="{{Op.id}}">{{Op.opcion}}</label>
+                    <input type="{{ejeOp.0.formType}}" id="{{ejeOp.0.id}}" name ="Ej{{ejeOp.0.id}}"/>
                     </li>
                 {% endfor %}
             </ul>

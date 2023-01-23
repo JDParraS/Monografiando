@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.http import HttpResponse,HttpResponseRedirect
 from Usuarios.models import Usuario,Calificacion
 from entrys.models import Modulo,Year,Semana,Evento,Contenido,Ejercicio,Opciones
+import re
+
 
 def verModulo(request,numTemp,numMod):
     Usro = Usuario.objects.filter(numTemp=numTemp)[0]
@@ -27,7 +29,7 @@ def verEvento(request,numTemp,numMod,numSem,numEven):
     even = Evento.objects.get(id=numEven)
     cdos = even.contenidos.all()
     ejs = Ejercicio.objects.filter(evento=even)
-    calif = Calificacion.objects.filter(evento=even,usuario=Usro) 
+    calif = Calificacion.objects.filter(evento=even,usuario=Usro).order_by('-id')[0]
     lstEjs = list()
     for i in ejs:
         lstOps=list()
@@ -42,13 +44,40 @@ def evaluador(request,numTemp,numMod,numSem,numEven):
     mod = Modulo.objects.get(pk=numMod)
     sem = Semana.objects.get(pk=numSem,modulo=mod)
     even = Evento.objects.get(id=numEven)
-    cdos = even.contenidos.all()
     ejs = Ejercicio.objects.filter(evento=even)
-    calif = Calificacion.objects.filter(evento=even,usuario=Usro) 
-    lstEjs = list()
-    for i in ejs:
-        lstOps=list()
-        lstOps.append(i)
-        lstOps.append(Opciones.objects.filter(ejercicio=i))
-        lstEjs.append(lstOps)
+    calif=0.0
+    punTot = 0
+    for ej in ejs:
+        punTot = punTot+ej.puntaje
+        opcs = ej.opciones_set.all()
+
+        if ej.formType=='radio':
+            try:
+                opcionEsc = opcs.get(id=request.POST['Ej'+str(ej.id)])
+            except:
+                continue
+            if opcionEsc.correcta==True:
+                calif=calif+ej.puntaje
+            continue
+        
+        
+
+        elif ej.formType=='checkbox':
+            opcsCor = opcs.filter(correcta=True)
+            valorOp = ej.puntaje/opcsCor.count()
+            for opc in opcsCor: 
+                try:
+                    if str(opc.id) == request.POST['Op'+str(opc.id)]:
+                        calif=calif+valorOp
+                except:
+                    pass
+            continue
+        
+        elif ej.formType=='text':
+            if len(request.POST['Ej'+str(ej.id)])>0:
+                calif = calif+ej.puntaje
+
+    calif = round(calif/punTot*5,2)
+    clifObj = Calificacion.objects.create(nota=calif,evento=even,usuario=Usro)
+    clifObj.save()
     return HttpResponseRedirect(reverse('entrys:verEvento',args=(numTemp,numMod,numSem,numEven)))

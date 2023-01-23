@@ -51,11 +51,11 @@ class Grupo(models.Model):
 
 
 class Calificacion(models.Model):
-    nota = models.IntegerField()
-    fecha = models.DateField()
+    nota = models.FloatField()
+    fecha = models.DateField(default=timezone.now())
     evento = models.ForeignKey('entrys.Evento',on_delete=models.CASCADE)
     usuario = models.ForeignKey(Usuario,on_delete=models.CASCADE)
-    grupo = models.ForeignKey(Grupo,on_delete=models.CASCADE)
+    grupo = models.ForeignKey(Grupo,on_delete=models.CASCADE,null=True,blank=True)
 
 
 
