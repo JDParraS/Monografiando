@@ -6,7 +6,7 @@
     <div style="">
     {% if Resumen %}
         {% for mod in Resumen  %}
-            <h1>{{mod.0.id}}</h1>
+            <div style='height:40px'></div>
             <h1><a href="{%url 'entrys:verModulo' Usro.numTemp mod.0.id%}">{{mod.0.tituloMod}}</a></h1>
             <h2>{{mod.1.tituloSem}}th week</h2>
             {% for ev in mod.2 %}

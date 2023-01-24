@@ -1,30 +1,29 @@
 
-{% extends "PagPrincipal/base.html" %}
-{% block cssAdicional %}
-    .liCambiar li{
-    margin-bottom: 10px;
-    }
-{% endblock  %}
-{% block title %}
-    Monografiando | Entrando
-{% endblock title %}
-{% block contenido%}
-<Form action= "{% url 'Usuarios:entrar' %}" method='post'>
-{% csrf_token %}
-    <ul class="liCambiar"style="list-style-type:none;">
-    <li>
-     <label for='nombreCompleto' >Nombre y Apellido</label>
-     <input  type='text' id='nombreCompleto' name='nombre'>
-    </li>
-    <li>
-     <label for='Contra' >Contraseña</label>
-     <input type='password' id='Contra' name='pw'>
-    </li>
-    <li>
-    <input type="submit" value="Entrar">
-    </li>
-    </ul>
-</form>
-{% endblock  %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Monografiando</title>
+  </head>
+  <body>    
+    <Form action= "{% url 'Usuarios:entrar' %}" method='post'>
+        {% csrf_token %}
+        <ul class="liCambiar"style="list-style-type:none;">
+        <li>
+            <label for='nombreCompleto' >Nombre y Apellido</label>
+            <input  type='text' id='nombreCompleto' name='nombre'>
+        </li>
+        <li>
+            <label for='Contra' >Contraseña</label>
+            <input type='password' id='Contra' name='pw'>
+        </li>
+        <li>
+            <input type="submit" value="Entrar">
+        </li>
+        </ul>
+    </form>
+ </body>
+</html>
 
 

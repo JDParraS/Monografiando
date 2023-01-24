@@ -11,61 +11,65 @@
         <h5>{{even.fecha}}</h5>
         <p><strong><em>{{even.comentarioSimple}}</em></strong></p>
         <p>{{even.comentario}}</p>
-        
-        {% for con in cdos %}
-            {% if con.tipo == 'pdf' %}
-                <embed src="C:/Users/julia/OneDrive/Documentos/ProyectoMonografiando/{{con.ubic}}" width="500" height="375" type="application/pdf">
-                <iframe src ='C:/Users/julia/OneDrive/Documentos/ProyectoMonografiando/{{con.ubic}}'></iframe>
-            {% endif %}
-            {% if con.tipo == 'video' %}
-                <video>
-                <source src ='C:/Users/julia/OneDrive/Documentos/ProyectoMonografiando/{{con.ubic}}' type = 'video/mp4'>
-                </video>
-            {% endif %}
-        {% endfor %}
-        
-        {% if lstEjOp %}
-            <p>Ejercicios:</p>
-            {% if calif %}
-                Tu calificacion pasada es {{calif.nota}}
-            {% endif %}
+
+        {% if cdos %}
+            {% for con in cdos %}
+                <p>{{con.ubic}}</p>
+                {% if con.tipo == 'pdf' %}
+                    <embed src="C:/Users/julia/OneDrive/Documentos/ProyectoMonografiando/{{con.ubic}}" width="500" height="375" type="application/pdf">
+                    <iframe src ='C:/Users/julia/OneDrive/Documentos/ProyectoMonografiando/{{con.ubic}}'></iframe>
+                {% endif %}
+                {% if con.tipo == 'video' %}
+                    <video>
+                    <source src ='C:/Users/julia/OneDrive/Documentos/ProyectoMonografiando/{{con.ubic}}' type = 'video/mp4'>
+                    </video>
+                {% endif %}
+            {% endfor %}
         {% endif %}
         
-        <form action="{% url 'entrys:evaluador' Usro.numTemp mod.id sem.id even.id%}" method="post">
+        <form action="{% url 'entrys:evaluador' Usro.numTemp even.id%}" method="post">
         {% csrf_token %}
-        {% for ejeOp in lstEjOp %}
-            <p>{{ejeOp.0.descripcion}}</p>
-            <p style="font-size: xx-small">{{ejeOp.0.puntaje}} puntos, {{ejeOp.0.tipo}}</p>
-            <ul style="list-style: none">
-            {% if ejeOp.0.formType == "radio"%}
-                {% for Op in ejeOp.1 %}
-                    <li>
-                    <input type="{{ejeOp.0.formType}}" id="{{Op.id}}" name ="Ej{{ejeOp.0.id}}" value="{{Op.id}}"/>
-                    <label for="{{Op.id}}">{{Op.opcion}}</label>
-                    </li>
-                {% endfor %}
-            </ul>
-            {% elif ejeOp.0.formType == "checkbox" %}
-                {% for Op in ejeOp.1 %}
-                    <li>
-                    <input type="{{ejeOp.0.formType}}" id="{{Op.id}}" name ="Op{{Op.id}}" value="{{Op.id}}"/>
-                    <label for="{{Op.id}}">{{Op.opcion}}</label>
-                    </li>
-                {% endfor %}
-            </ul>
-            {% elif ejeOp.0.formType == "text" %}
-                {% for Op in ejeOp.1 %}
-                    <li>
-                    <label for="{{Op.id}}">{{Op.opcion}}</label>
-                    <input type="{{ejeOp.0.formType}}" id="{{ejeOp.0.id}}" name ="Ej{{ejeOp.0.id}}"/>
-                    </li>
-                {% endfor %}
-            </ul>
-            {%endif%}
-        {% endfor %}
-        
+
+        {% if lstEjOp %}
+                <p>Ejercicios:</p>
+            {% for ejeOp in lstEjOp %}
+                <p>{{ejeOp.0.descripcion}}</p>
+                <p style="font-size: xx-small">{{ejeOp.0.puntaje}} puntos, {{ejeOp.0.tipo}}</p>
+                <ul style="list-style: none">
+                {% if ejeOp.0.formType == "radio"%}
+                    {% for Op in ejeOp.1 %}
+                        <li>
+                        <input type="{{ejeOp.0.formType}}" id="{{Op.id}}" name ="Ej{{ejeOp.0.id}}" value="{{Op.id}}"/>
+                        <label for="{{Op.id}}">{{Op.opcion}}</label>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% elif ejeOp.0.formType == "checkbox" %}
+                    {% for Op in ejeOp.1 %}
+                        <li>
+                        <input type="{{ejeOp.0.formType}}" id="{{Op.id}}" name ="Op{{Op.id}}" value="{{Op.id}}"/>
+                        <label for="{{Op.id}}">{{Op.opcion}}</label>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% elif ejeOp.0.formType == "text" %}
+                    {% for Op in ejeOp.1 %}
+                        <li>
+                        <label for="{{Op.id}}">{{Op.opcion}}</label>
+                        <input type="{{ejeOp.0.formType}}" id="{{ejeOp.0.id}}" name ="Ej{{ejeOp.0.id}}"/>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {%endif%}
+            {% endfor %}
+        {%endif%}
+
         <input type="submit" value="Enviar calificacion">
         </form>
+        
+        {% if calif %}
+            <p>Tu calificacion pasada es {{calif.nota}}</p>
+        {% endif %}
     
     </div>
 {% endblock contenido %}

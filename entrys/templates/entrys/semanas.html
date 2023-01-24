@@ -6,7 +6,7 @@
     <div>
         <h1>Semana {{sem.tituloSem}}</h1>
         {% for ev in evens %}
-            <h2><a href = "{% url 'entrys:verEvento' Usro.numTemp mod.id sem.id ev.id%}">{{ev.nombre}}</a></h2>
+            <h2><a href = "{% url 'entrys:verEvento' Usro.numTemp ev.id%}">{{ev.nombre}}</a></h2>
             <p><em>{{ev.comentarioSimple}}</em></p>
             <h5>{{ev.fecha}}</h5>       
         {% endfor %}

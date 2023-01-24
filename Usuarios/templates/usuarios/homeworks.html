@@ -1,0 +1,22 @@
+{% extends "PagPrincipal/base.html" %}
+
+{% block contenido %}
+    
+    {% if evens %}
+        {% for ev in evens %}
+            <h2><a href="{%url 'entrys:verEvento' Usro.numTemp ev.id%}">{{ev.nombre}}</a></h2>
+            <p>{{ev.comentarioSimple}}</p>
+            <p><em>{{ev.fecha}}</em></p>
+            <h1></h1>
+        {%endfor%}
+    {% else %}
+
+        <p>No tienes tareas pendientes</p>
+
+    {% endif %}
+    
+    
+
+
+
+{% endblock contenido %}

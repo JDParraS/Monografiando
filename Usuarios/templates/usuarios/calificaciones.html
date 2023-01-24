@@ -1,0 +1,20 @@
+
+{% extends "PagPrincipal/base.html" %}
+{% block contenido %}
+
+  <h1>Calificaciones</h1>
+  
+  {% for evCal in liEvCal %}
+    <h3><a href="{%url 'entrys:verEvento' Usro.numTemp evCal.0.id%}">{{evCal.0.nombre}}</a></h3>
+    <p style="font-size: small;">Calificacion:</p>
+      {% if evCal.1 %}
+        {{evCal.1.nota}}
+      {% else %}
+        Sin Calificar
+      {% endif %}
+    </p>
+
+    <p><em>{{evCal.0.comentarioSimple}}</em></p>
+  {% endfor %}
+
+{% endblock contenido %}

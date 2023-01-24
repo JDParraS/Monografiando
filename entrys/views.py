@@ -22,27 +22,26 @@ def verSemana(request,numTemp,numMod,numSem):
     context = {'mod':mod,'sem':sem,'Usro':Usro,'evens':evens}
     return render(request,'entrys/semanas.html',context)
 
-def verEvento(request,numTemp,numMod,numSem,numEven):
+def verEvento(request,numTemp,numEven):
     Usro = Usuario.objects.filter(numTemp=numTemp)[0]
-    mod = Modulo.objects.get(pk=numMod)
-    sem = Semana.objects.get(pk=numSem,modulo=mod)
     even = Evento.objects.get(id=numEven)
     cdos = even.contenidos.all()
     ejs = Ejercicio.objects.filter(evento=even)
-    calif = Calificacion.objects.filter(evento=even,usuario=Usro).order_by('-id')[0]
+    try:
+        calif = Calificacion.objects.filter(evento=even,usuario=Usro).order_by('-id')[0]
+    except:
+        calif=None
     lstEjs = list()
     for i in ejs:
         lstOps=list()
         lstOps.append(i)
         lstOps.append(Opciones.objects.filter(ejercicio=i))
         lstEjs.append(lstOps)
-    context = {'mod':mod,'sem':sem,'Usro':Usro,'even':even,'cdos':cdos,'lstEjOp':lstEjs,'calif':calif}
+    context = {'Usro':Usro,'even':even,'cdos':cdos,'lstEjOp':lstEjs,'calif':calif}
     return render(request,'entrys/entrada.html',context)
 
-def evaluador(request,numTemp,numMod,numSem,numEven):
+def evaluador(request,numTemp,numEven):
     Usro = Usuario.objects.filter(numTemp=numTemp)[0]
-    mod = Modulo.objects.get(pk=numMod)
-    sem = Semana.objects.get(pk=numSem,modulo=mod)
     even = Evento.objects.get(id=numEven)
     ejs = Ejercicio.objects.filter(evento=even)
     calif=0.0
@@ -77,7 +76,10 @@ def evaluador(request,numTemp,numMod,numSem,numEven):
             if len(request.POST['Ej'+str(ej.id)])>0:
                 calif = calif+ej.puntaje
 
-    calif = round(calif/punTot*5,2)
+    try:
+        calif = round(calif/punTot*5,2)
+    except:
+        calif= 5
     clifObj = Calificacion.objects.create(nota=calif,evento=even,usuario=Usro)
     clifObj.save()
-    return HttpResponseRedirect(reverse('entrys:verEvento',args=(numTemp,numMod,numSem,numEven)))
+    return HttpResponseRedirect(reverse('entrys:verEvento',args=(numTemp,numEven)))
