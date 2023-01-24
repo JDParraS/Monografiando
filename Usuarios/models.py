@@ -27,7 +27,7 @@ class Usuario(models.Model):
     nombre_usuario = models.CharField(max_length=300)
     nickname = models.CharField(max_length=100)
     contraseña = models.CharField(max_length=100)
-    profesor =models.BooleanField()
+    profesor =models.BooleanField(default=False)
     temaInv = models.ForeignKey(Tema,on_delete=models.CASCADE,blank=True,null=True)
     curso = models.ForeignKey(Curso,on_delete=models.CASCADE,blank=True,null=True)
     evento = models.ManyToManyField('entrys.Evento',through='Calificacion',blank=True,null=True)

@@ -4,25 +4,29 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
     <title>Monografiando</title>
   </head>
-  <body>    
-    <Form action= "{% url 'Usuarios:entrar' %}" method='post'>
-        {% csrf_token %}
-        <ul class="liCambiar"style="list-style-type:none;">
-        <li>
-            <label for='nombreCompleto' >Nombre y Apellido</label>
-            <input  type='text' id='nombreCompleto' name='nombre'>
-        </li>
-        <li>
-            <label for='Contra' >Contraseña</label>
-            <input type='password' id='Contra' name='pw'>
-        </li>
-        <li>
-            <input type="submit" value="Entrar">
-        </li>
-        </ul>
-    </form>
+  <body>
+    <div class='formulario'>
+      <Form action= "{% url 'Usuarios:entrar' %}" method='post'>
+          {% csrf_token %}
+          <ul class="liCambiar"style="list-style-type:none;">
+          <li>
+              <label for='nombreCompleto' >Nombre y Apellido</label>
+              <input  type='text' id='nombreCompleto' name='nombre'>
+          </li>
+          <li>
+              <label for='Contra' >Contraseña</label>
+              <input type='password' id='Contra' name='pw'>
+          </li>
+          <li>
+              <input type="submit" value="Entrar">
+          </li>
+          </ul>
+      </form>
+      <h3><a href="{%url 'Usuarios:formCrear'%}">Crear Cuenta</a><h3>
+    </div>
  </body>
 </html>
 

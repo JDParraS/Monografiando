@@ -6,7 +6,7 @@ from random import randint as ran
 import datetime
 
 from entrys.models import Evento,Year,Modulo
-from Usuarios.models import Calificacion
+from Usuarios.models import Calificacion,Tema,Curso
 
 def formEntrar(request):
     return render(request,'Usuarios/formEntrar.html')
@@ -21,6 +21,21 @@ def entrar(request):
         return HttpResponse('equivocado')
     
     return HttpResponseRedirect(reverse('PagPrincipal:pag',args=(user.numTemp,)))
+
+def formCrear(request):
+    curs = Curso.objects.all()
+    tems = Tema.objects.all()
+    context={'curs':curs,'tems':tems}
+    return render(request,'Usuarios/crearCuenta.html',context)
+
+def crear(request):
+    nombre = request.POST['nombre']
+    nickname = request.POST['nick']
+    contraseña = request.POST['pw']
+    temaInv = Tema.objects.get(id=request.POST['TemaInv'])
+    curso = Curso.objects.get(id=request.POST['Curso'])
+    Usuario.objects.create(nombre_usuario=nombre,nickname=nickname,contraseña=contraseña,temaInv=temaInv,curso=curso)
+    return HttpResponseRedirect(reverse('Usuarios:formEntrar'))
 
 def calificaciones(request,numTemp):
     Usro = Usuario.objects.filter(numTemp=numTemp)[0] 
